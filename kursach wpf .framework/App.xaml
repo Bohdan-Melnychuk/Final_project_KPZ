@@ -1,0 +1,8 @@
+﻿<Application
+    x:Class="kursach_wpf.framework.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:kursach_wpf.framework"
+    StartupUri="MainWindow.xaml">
+    <Application.Resources />
+</Application>
