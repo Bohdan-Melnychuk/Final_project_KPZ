@@ -44,7 +44,7 @@ namespace kursach_wpf.framework
                 board.AddFigure(WhitePawn, MyCanvas);
             }
 
-                                                         //Rook
+                                                        //Rook
             //Black Rook Left
             Rook BlackRookL = new Rook("rook1", false, 0, 0);
             BlackFigure.Add(BlackRookL);
@@ -65,7 +65,7 @@ namespace kursach_wpf.framework
             WhiteFigure.Add(WhiteRookR);
             board.AddFigure(WhiteRookR, MyCanvas);
 
-                                                        //Knight
+                                                       //Knight
             //Black Knight Left
             Knight BlackKnightL = new Knight("knight1", false, 1, 0);
             BlackFigure.Add(BlackKnightL);
@@ -86,7 +86,7 @@ namespace kursach_wpf.framework
             WhiteFigure.Add(WhiteKnightR);
             board.AddFigure(WhiteKnightR, MyCanvas);
 
-                                                       //Bishop
+                                                      //Bishop
             //Black Bishop Left
             Bishop BlackBishopL = new Bishop("1", false, 2, 0);
             BlackFigure.Add(BlackBishopL);
@@ -113,7 +113,7 @@ namespace kursach_wpf.framework
             King WhiteKing = new King("2", true, 4, 7);
             WhiteFigure.Add(WhiteKing);
             board.AddFigure(WhiteKing, MyCanvas);
-                                                    //Queen
+                                                      //Queen
             //Black Queen
             Queen BlackQueen = new Queen("1", false, 3, 0);
             BlackFigure.Add(BlackQueen);

@@ -16,5 +16,9 @@ namespace kursach_wpf.framework
         {
 
         }
+        public override void MoveFigure(List<Figure> white, List<Figure> black)
+        {
+
+        }
     }
 }
