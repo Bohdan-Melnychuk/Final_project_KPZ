@@ -119,5 +119,10 @@
     <Resource Include="Image\Queen White Outline 288px.png" />
     <Resource Include="Image\Rook White Outline 288px.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\chess_attack_King_marker.png" />
+    <Resource Include="Image\chess_attack_marker.png" />
+    <Resource Include="Image\chess_move_point.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

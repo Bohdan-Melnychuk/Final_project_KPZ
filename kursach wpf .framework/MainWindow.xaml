@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kursach_wpf.framework"
         mc:Ignorable="d"
-        Title="MainWindow" Height="677" Width="654">
+        Title="MainWindow" Height="777" Width="754">
 
     <Canvas x:Name="MyCanvas" Background="Coral">
     </Canvas>
