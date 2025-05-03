@@ -18,30 +18,30 @@ namespace kursach_wpf.framework
         }
         public override void MoveFigure(Board board)
         {
-            for (int i = X + 1, j = Y - 1; i < board.boardSize; i++, j--) // вправо вверх
+            for (int i = X + 1, j = Y - 1; i < board.boardSize && j >= 0; i++, j--) // Вправо вверх
             {
                 if (board.AddMarker(i, j, board.ArrFigure[X, Y].Color))
                 {
                     break;
                 }
             }
-            for (int i = Y + 1, j = Y - 1; i < board.boardSize; i++, j--) // вліво вниз
+            for (int i = X - 1, j = Y + 1; i >= 0 && j < board.boardSize; i--, j++) // Вліво вниз
             {
-                if (board.AddMarker(j, i, board.ArrFigure[X, Y].Color))
+                if (board.AddMarker(i, j, board.ArrFigure[X, Y].Color))
                 {
                     break;
                 }
             }
-            for (int i = X - 1; i >= 0; i--) // вліво вверх
+            for (int i = X - 1, j = Y - 1; i >= 0 && j >= 0; i--, j--) // Вліво вверх
             {
-                if (board.AddMarker(i, i, board.ArrFigure[X, Y].Color))
+                if (board.AddMarker(i, j, board.ArrFigure[X, Y].Color))
                 {
                     break;
                 }
             }
-            for (int i = Y + 1; i >= 0; i++) // вправо вниз
+            for (int i = X + 1, j = Y + 1; i < board.boardSize && j < board.boardSize; i++, j++) // Вправо вниз
             {
-                if (board.AddMarker(i, i, board.ArrFigure[X, Y].Color))
+                if (board.AddMarker(i, j, board.ArrFigure[X, Y].Color))
                 {
                     break;
                 }

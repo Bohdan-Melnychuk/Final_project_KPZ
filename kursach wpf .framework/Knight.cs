@@ -18,7 +18,17 @@ namespace kursach_wpf.framework
         }
         public override void MoveFigure(Board board)
         {
+            board.AddMarker(X + 1, Y - 2, board.ArrFigure[X, Y].Color);
+            board.AddMarker(X - 1, Y - 2, board.ArrFigure[X, Y].Color);
 
+            board.AddMarker(X - 1, Y + 2, board.ArrFigure[X, Y].Color);
+            board.AddMarker(X + 1, Y + 2, board.ArrFigure[X, Y].Color);
+
+            board.AddMarker(X - 2, Y + 1, board.ArrFigure[X, Y].Color);
+            board.AddMarker(X + 2, Y + 1, board.ArrFigure[X, Y].Color);
+
+            board.AddMarker(X + 2, Y - 1, board.ArrFigure[X, Y].Color);
+            board.AddMarker(X - 2, Y - 1, board.ArrFigure[X, Y].Color);
         }
     }
 }
