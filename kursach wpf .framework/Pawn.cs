@@ -27,10 +27,10 @@ namespace kursach_wpf.framework
         {
             if ((Y - 1 >= 0 && Y - 1 < board.boardSize) && board.ArrFigure[X, Y - 1] == null)
             {
-                board.AddMarker(X, Y - 1, board.ArrFigure[X, Y].Color);
+                board.AddMarker(X, Y - 1, board.ArrFigure[X, Y].Color); //!
                 if (FirstMove && (Y - 2 >= 0 && Y - 2 < board.boardSize) && board.ArrFigure[X, Y - 2] == null)
                 {
-                    //FirstMove = false;
+                    FirstMove = false;
                     board.AddMarker(X, Y - 2, board.ArrFigure[X, Y].Color);
                 }
             }

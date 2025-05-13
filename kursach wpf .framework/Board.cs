@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,7 +15,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 using System.Xml.Linq;
-using static System.Net.WebRequestMethods;
 
 namespace kursach_wpf.framework
 {
@@ -23,7 +23,9 @@ namespace kursach_wpf.framework
         public Canvas MyCanvas;
         public Cell[,] boardArray = new Cell[8, 8];
         public Figure[,] ArrFigure = new Figure[8, 8];
-        public List<Image> ListMarcker = new List<Image>();
+        public List<(string, Image)> ListMarcker = new List<(string, Image)>();
+
+        private Figure ActiveFigure;
 
         int tileSize = 80;
         public int boardSize = 8;
@@ -37,7 +39,7 @@ namespace kursach_wpf.framework
             //Black Pawn
             for (int i = 0; i < 8; i++)
             {
-                ArrFigure[i, 1] = new Pawn(false, i, 1);
+                //ArrFigure[i, 1] = new Pawn(false, i, 1);
                 ArrFigure[i, 6] = new Pawn(true, i, 6);
             }
             //Rook
@@ -64,10 +66,9 @@ namespace kursach_wpf.framework
 
 
             //ArrFigure[3, 3] = new Bishop(true, 3, 3);
-            ArrFigure[3, 3] = new Queen(false, 3, 3);
+            ArrFigure[3, 4] = new Queen(false, 3, 4);
             //ArrFigure[2, 5] = new Bishop(false, 2, 5);
 
-            ArrFigure[3, 3].MoveFigure(this);
 
             for (int i = 0; i < boardSize; i++)
             {
@@ -120,20 +121,28 @@ namespace kursach_wpf.framework
             int x = tileSize * figure.X;
             int y = tileSize * figure.Y;
 
-            figure.ImageFigure.MouseEnter += (object sender, MouseEventArgs e) =>
+            figure.ImageFigure.MouseDown += (sender, e) =>
             {
-                figure.MoveFigure(this);
-            };
-            figure.ImageFigure.MouseLeave += (object sender, MouseEventArgs e) =>
-            {
-                foreach (var element in ListMarcker)
+                if (ActiveFigure != null)
                 {
-                    MyCanvas.Children.Remove(element);
+                    foreach (var element in ListMarcker)
+                    {
+                        MyCanvas.Children.Remove(element.Item2);
+                    }
+                    ListMarcker.Clear();
+                    ActiveFigure = null;
                 }
-                ListMarcker.Clear();
+                else
+                {
+                    figure.MoveFigure(this);
+                    ActiveFigure = figure;
+                }
             };
+
             Canvas.SetLeft(figure.ImageFigure, x + margin);
             Canvas.SetTop(figure.ImageFigure, y + margin);
+
+
             MyCanvas.Children.Add(figure.ImageFigure);
         }
         public bool AddMarker(int x, int y, bool color)
@@ -144,8 +153,8 @@ namespace kursach_wpf.framework
             {
 
                 Width = 80,
-                Height = 80
-
+                Height = 80,
+                Cursor = Cursors.Hand
             };
 
             if (!(x <= 7 && y >= 0 && x >=0 && y <=7))
@@ -166,16 +175,45 @@ namespace kursach_wpf.framework
             {
                 image.Source = new BitmapImage(new Uri("pack://application:,,,/Image/chess_move_point.png"));
                 Enemy = false;
-            }   
+            }
 
-
-
+            image.MouseDown += MoveFigure;
             Canvas.SetZIndex(image, 5);
             Canvas.SetTop(image, Y + margin);
             Canvas.SetLeft(image, X + margin);
-            ListMarcker.Add(image);
+            ListMarcker.Add(($"{x}{y}", image));
             MyCanvas.Children.Add(image);
             return Enemy;
+        }
+
+        void MoveFigure(object sender, RoutedEventArgs e)
+        {
+            string Element = ListMarcker.Where(x => x.Item2 == (Image)sender).First().Item1;
+
+            {
+                
+            }
+            ArrFigure[ActiveFigure.X, ActiveFigure.Y] = null;
+            ActiveFigure.X = int.Parse($"{Element[0]}");
+            ActiveFigure.Y = int.Parse($"{Element[1]}");
+            if (ArrFigure[ActiveFigure.X, ActiveFigure.Y] != null)
+            {
+                MyCanvas.Children.Remove(ArrFigure[ActiveFigure.X, ActiveFigure.Y].ImageFigure);
+                ArrFigure[ActiveFigure.X, ActiveFigure.Y] = null;
+            }
+
+            ArrFigure[ActiveFigure.X, ActiveFigure.Y] = ActiveFigure;
+
+            Image Element2 = (Image)sender;
+
+            Canvas.SetLeft(ActiveFigure.ImageFigure, Canvas.GetLeft(Element2));
+            Canvas.SetTop(ActiveFigure.ImageFigure, Canvas.GetTop(Element2));
+            foreach (var element in ListMarcker)
+            {
+                MyCanvas.Children.Remove(element.Item2);
+            }
+            ListMarcker.Clear();
+            ActiveFigure = null;
         }
     }
 }
