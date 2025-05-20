@@ -19,30 +19,30 @@ namespace kursach_wpf.framework
         }
         public override void MoveFigure(Board board)
         {
-            for (int i = X + 1; i < board.boardSize; i++)
+            for (int i = X + 1; i < board.boardSize; i++) // Вправо
             {
-                if (X > board.boardSize && board.AddMarker(i, Y, board.ArrFigure[X, Y].Color) )
+                if (board.AddMarker(i, Y, board.ArrFigure[X, Y].Color))
                 {
                     break;
                 }
             }
-            for (int i = Y + 1; i < board.boardSize; i++)
+            for (int i = Y + 1; i < board.boardSize; i++) // Вниз
             {
-                if (Y > board.boardSize && board.AddMarker(X, i, board.ArrFigure[X, Y].Color))
+                if (board.AddMarker(X, i, board.ArrFigure[X, Y].Color))
                 {
                     break;
                 }
             }
-            for (int i = X - 1; i >= 0; i--)
+            for (int i = X - 1; i >= 0; i--) // Вліво
             {
-                if (X < 0 && board.AddMarker(i, Y, board.ArrFigure[X, Y].Color))
+                if (board.AddMarker(i, Y, board.ArrFigure[X, Y].Color))
                 {
                     break;
                 }
             }
-            for (int i = Y - 1; i >= 0; i--)
+            for (int i = Y - 1; i >= 0; i--) // Вверх
             {
-                if (Y < 0 && board.AddMarker(X, i, board.ArrFigure[X, Y].Color))
+                if (board.AddMarker(X, i, board.ArrFigure[X, Y].Color))
                 {
                     break;
                 }

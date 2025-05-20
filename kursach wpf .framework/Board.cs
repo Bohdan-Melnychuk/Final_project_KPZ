@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 
@@ -26,9 +27,9 @@ namespace kursach_wpf.framework
 
         private Figure ActiveFigure;
 
-        int tileSize = 80;
+        public int tileSize = 80;
         public int boardSize = 8;
-        int margin = 50;
+        public int margin = 50;
         int ramkaSize = 40;
 
         Rectangle ramka = new Rectangle();
@@ -38,8 +39,8 @@ namespace kursach_wpf.framework
             //Black Pawn
             for (int i = 0; i < 8; i++)
             {
-                //ArrFigure[i, 1] = new Pawn(false, i, 1);
-                ArrFigure[i, 6] = new Pawn(true, i, 6);
+                ArrFigure[i, 1] = new Pawn(false, i, 1, MyCanvas);
+                ArrFigure[i, 6] = new Pawn(true, i, 6, MyCanvas);
             }
             //Rook
             ArrFigure[0, 0] = new Rook(false, 0, 0); //Black Rook Left
@@ -63,9 +64,8 @@ namespace kursach_wpf.framework
             ArrFigure[3, 0] = new Queen(false, 3, 0); //Black Queen
             ArrFigure[3, 7] = new Queen(true, 3, 7); //White Queen
 
-
             //ArrFigure[3, 3] = new Bishop(true, 3, 3);
-            ArrFigure[3, 4] = new Queen(false, 3, 4);
+            //ArrFigure[3, 4] = new Rook(false, 3, 4);
             //ArrFigure[2, 5] = new Bishop(false, 2, 5);
 
 
@@ -141,7 +141,6 @@ namespace kursach_wpf.framework
             Canvas.SetLeft(figure.ImageFigure, x + margin);
             Canvas.SetTop(figure.ImageFigure, y + margin);
 
-
             MyCanvas.Children.Add(figure.ImageFigure);
         }
         public bool AddMarker(int x, int y, bool color)
@@ -150,7 +149,6 @@ namespace kursach_wpf.framework
             int Y = tileSize * (y);
             Image image = new Image
             {
-
                 Width = 80,
                 Height = 80,
                 Cursor = Cursors.Hand
@@ -189,9 +187,6 @@ namespace kursach_wpf.framework
         {
             string Element = ListMarcker.Where(x => x.Item2 == (Image)sender).First().Item1;
 
-            {
-                
-            }
             ArrFigure[ActiveFigure.X, ActiveFigure.Y] = null;
             ActiveFigure.X = int.Parse($"{Element[0]}");
             ActiveFigure.Y = int.Parse($"{Element[1]}");
@@ -212,6 +207,7 @@ namespace kursach_wpf.framework
                 MyCanvas.Children.Remove(element.Item2);
             }
             ListMarcker.Clear();
+
             ActiveFigure = null;
         }
     }
