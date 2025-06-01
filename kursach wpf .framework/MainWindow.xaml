@@ -1,13 +1,186 @@
-﻿<Window x:Class="kursach_wpf.framework.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:kursach_wpf.framework"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="777" Width="754">
+﻿<Window
+    x:Class="kursach_wpf.framework.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:kursach_wpf.framework"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Гра в ШАХИ"
+    Width="754"
+    Height="777"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
 
     <Canvas x:Name="MyCanvas" Background="Coral">
+
+
+
+        <Label
+            Canvas.Left="48"
+            Canvas.Top="45"
+            Width="20"
+            Height="25"
+            Panel.ZIndex="999"
+            Content="A"
+            FontSize="13" />
+        <Label
+            Canvas.Left="48"
+            Canvas.Top="125"
+            Width="20"
+            Height="25"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="999"
+            Content="B"
+            FontSize="13" />
+        <Label
+            Canvas.Left="48"
+            Canvas.Top="205"
+            Width="20"
+            Height="25"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="999"
+            Content="C"
+            FontSize="13" />
+        <Label
+            Canvas.Left="48"
+            Canvas.Top="285"
+            Width="20"
+            Height="25"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="999"
+            Content="D"
+            FontSize="13" />
+        <Label
+            Canvas.Left="48"
+            Canvas.Top="365"
+            Width="20"
+            Height="25"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="999"
+            Content="E"
+            FontSize="13" />
+        <Label
+            Canvas.Left="48"
+            Canvas.Top="445"
+            Width="20"
+            Height="25"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="999"
+            Content="F"
+            FontSize="13" />
+        <Label
+            Canvas.Left="48"
+            Canvas.Top="525"
+            Width="20"
+            Height="25"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="999"
+            Content="G"
+            FontSize="13" />
+        <Label
+            Canvas.Left="48"
+            Canvas.Top="605"
+            Width="20"
+            Height="25"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="999"
+            Content="H"
+            FontSize="13" />
+
+
+
+        <Label
+            Canvas.Left="114"
+            Canvas.Top="667"
+            Width="20"
+            Height="25"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="999"
+            Content="1"
+            FontSize="13" />
+        <Label
+            Canvas.Left="194"
+            Canvas.Top="667"
+            Width="20"
+            Height="25"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="999"
+            Content="2"
+            FontSize="13" />
+        <Label
+            Canvas.Left="274"
+            Canvas.Top="667"
+            Width="20"
+            Height="25"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="999"
+            Content="3"
+            FontSize="13" />
+        <Label
+            Canvas.Left="354"
+            Canvas.Top="667"
+            Width="20"
+            Height="25"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="999"
+            Content="4"
+            FontSize="13" />
+        <Label
+            Canvas.Left="434"
+            Canvas.Top="667"
+            Width="20"
+            Height="25"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="999"
+            Content="5"
+            FontSize="13" />
+        <Label
+            Canvas.Left="514"
+            Canvas.Top="667"
+            Width="20"
+            Height="25"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="999"
+            Content="6"
+            FontSize="13" />
+        <Label
+            Canvas.Left="594"
+            Canvas.Top="667"
+            Width="20"
+            Height="25"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="999"
+            Content="7"
+            FontSize="13" />
+        <Label
+            Canvas.Left="674"
+            Canvas.Top="667"
+            Width="20"
+            Height="25"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="999"
+            Content="8"
+            FontSize="13" />
+
+
+
+
     </Canvas>
 
 </Window>

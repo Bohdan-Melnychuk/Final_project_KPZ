@@ -12,40 +12,72 @@ namespace kursach_wpf.framework
         {
 
         }
+
         public Bishop( bool color, int x, int y) : base( color, x, y, $"pack://application:,,,/Image/Bishop {(color ? "White" : "Black")} Outline 288px.png")
         {
 
         }
-        public override void MoveFigure(Board board)
+
+        public override bool IsAttacking(int targetX, int targetY)
         {
-            for (int i = X + 1, j = Y - 1; i < board.boardSize && j >= 0; i++, j--) // Вправо вверх
+            return Math.Abs(targetX - X) == Math.Abs(targetY - Y) &&
+                   !IsBlockedPath(X, Y, targetX, targetY);
+        }
+
+        public override void MoveFigure()
+        {
+            if (!board.IsKingInCheck(Color))
             {
-                if (board.AddMarker(i, j, board.ArrFigure[X, Y].Color))
+                StandardMoves();
+                return;
+            }
+            DefensiveMoves();
+        }
+
+        private void DefensiveMoves()
+        {
+            var king = board.GetKing(Color);
+            var attackers = board.GetAttackers(king.X, king.Y, Color);
+
+            if (attackers.Count > 1)
+                return;
+
+            var attacker = attackers[0];
+
+            if (CanReach(attacker.X, attacker.Y) &&
+                (board.ArrFigure[attacker.X, attacker.Y] == null ||
+                 board.ArrFigure[attacker.X, attacker.Y].Color != Color))
+            {
+                board.AddMarker(attacker.X, attacker.Y, Color);
+            }
+
+            if (attacker is Rook || attacker is Bishop || attacker is Queen)
+            {
+                var path = board.GetPathBetween(attacker.X, attacker.Y, king.X, king.Y);
+                foreach (var (x, y) in path)
                 {
-                    break;
+                    if (CanReach(x, y) && board.ArrFigure[x, y] == null)
+                    {
+                        board.AddMarker(x, y, Color);
+                    }
                 }
             }
-            for (int i = X - 1, j = Y + 1; i >= 0 && j < board.boardSize; i--, j++) // Вліво вниз
-            {
-                if (board.AddMarker(i, j, board.ArrFigure[X, Y].Color))
-                {
-                    break;
-                }
-            }
-            for (int i = X - 1, j = Y - 1; i >= 0 && j >= 0; i--, j--) // Вліво вверх
-            {
-                if (board.AddMarker(i, j, board.ArrFigure[X, Y].Color))
-                {
-                    break;
-                }
-            }
-            for (int i = X + 1, j = Y + 1; i < board.boardSize && j < board.boardSize; i++, j++) // Вправо вниз
-            {
-                if (board.AddMarker(i, j, board.ArrFigure[X, Y].Color))
-                {
-                    break;
-                }
-            }
+        }
+
+        private void StandardMoves()
+        {
+            ScanDiagonal(X, Y, 1, -1, true);  // Вправо-вверх
+            ScanDiagonal(X, Y, -1, 1, true);  // Вліво-вниз
+            ScanDiagonal(X, Y, -1, -1, true); // Вліво-вверх
+            ScanDiagonal(X, Y, 1, 1, true);   // Вправо-вниз
+        }
+
+        public override void FillArrayAttacksCell()
+        {
+            ScanDiagonal(X, Y, 1, -1);
+            ScanDiagonal(X, Y, -1, 1);
+            ScanDiagonal(X, Y, -1, -1);
+            ScanDiagonal(X, Y, 1, 1);
         }
     }
 }

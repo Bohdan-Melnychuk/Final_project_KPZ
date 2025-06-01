@@ -39,24 +39,20 @@ namespace kursach_wpf.framework
 
             }
         }
-
         public King(bool color) : base(color, $"pack://application:,,,/Image/King {(color ? "White" : "Black")} Outline 288px.png")
         {
 
         }
-
         public King(bool color, int x, int y) : base(color, x, y, $"pack://application:,,,/Image/King {(color ? "White" : "Black")} Outline 288px.png")
         {
 
         }
-
         public override bool IsAttacking(int targetX, int targetY)
         {
             int dx = Math.Abs(targetX - X);
             int dy = Math.Abs(targetY - Y);
             return dx <= 1 && dy <= 1;
         }
-
         public override bool CanMoveTo(int targetX, int targetY)
         {
             if (!base.CanMoveTo(targetX, targetY))
@@ -70,7 +66,6 @@ namespace kursach_wpf.framework
 
             return true;
         }
-
         public override void MoveFigure()
         {
             TryAddMove(X + 1, Y);      // right
@@ -81,9 +76,8 @@ namespace kursach_wpf.framework
             TryAddMove(X - 1, Y + 1);  // left + down
             TryAddMove(X + 1, Y - 1);  // right + up
             TryAddMove(X - 1, Y - 1);  // left + up
-            CanMoveToCastling();
+            castling();
         }
-
         private void TryAddMove(int targetX, int targetY)
         {
             if (targetX < 0 || targetX >= board.boardSize || targetY < 0 || targetY >= board.boardSize)
@@ -105,7 +99,6 @@ namespace kursach_wpf.framework
                 board.AddMarker(targetX, targetY, Color);
             }
         }
-
         private bool IsCellUnderAttack(int x, int y, bool kingColor)
         {
             for (int i = 0; i < board.boardSize; i++)
@@ -134,7 +127,6 @@ namespace kursach_wpf.framework
             CheckCell(X + 1, Y - 1);
             CheckCell(X - 1, Y - 1);
         }
-
         private bool IsMovingIntoLineOfFire(int targetX, int targetY)
         {
             foreach (var figure in board.GetAllFigures(!Color))
@@ -147,13 +139,12 @@ namespace kursach_wpf.framework
             }
             return false;
         }
-
         public bool IsAttackingCell(int targetX, int targetY)
         {
             return Math.Abs(X - targetX) <= 1 && Math.Abs(Y - targetY) <= 1;
         }
 
-        public void CanMoveToCastling()
+        public void castling()
         {
             try
             {
@@ -186,8 +177,9 @@ namespace kursach_wpf.framework
             {
                 throw;
             } 
-        }
+            
 
+        }
         public void Racerovka(object sender, RoutedEventArgs e)
         {
             string Element = board.ListMarcker.Where(x => x.Item2 == (Image)sender).First().Item1;
@@ -214,5 +206,6 @@ namespace kursach_wpf.framework
                 board.ArrFigure[Xr - 2, Yr] = null;
             }
         }
+
     }
 }

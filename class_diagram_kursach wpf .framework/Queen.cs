@@ -12,12 +12,10 @@ namespace kursach_wpf.framework
         {
 
         }
-
         public Queen(bool color, int x, int y) : base(color, x, y, $"pack://application:,,,/Image/Queen {(color ? "White" : "Black")} Outline 288px.png")
         {
     
         }
-
         public override bool IsAttacking(int targetX, int targetY)
         {
             return ((targetX == X || targetY == Y) ||
@@ -64,7 +62,6 @@ namespace kursach_wpf.framework
                 }
             }
         }
-
         private void StandardMoves()
         {
             ScanDiagonal(X, Y, 1, -1, true);  // Вправо-вверх

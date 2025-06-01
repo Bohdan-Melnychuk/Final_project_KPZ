@@ -61,7 +61,6 @@ namespace kursach_wpf.framework
             background.Width = 330;
             background.Height = 90;
 
-            // Додавання кнопок
             AddPieceButton(buttonsPanel, "Queen", isWhite);
             AddPieceButton(buttonsPanel, "Rook", isWhite);
             AddPieceButton(buttonsPanel, "Bishop", isWhite);

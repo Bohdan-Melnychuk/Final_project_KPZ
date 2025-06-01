@@ -1,6 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Xml.Linq;
 
 
 namespace kursach_wpf.framework
@@ -9,17 +20,14 @@ namespace kursach_wpf.framework
     {
         public Canvas MyCanvas;
         public bool FirstMove = true;
-
         public Pawn(bool color) : base(color, $"pack://application:,,,/Image/Pawn {(color ? "White" : "Black")} Outline 288px.png")
         {
 
         }
-
         public Pawn(bool color, int x, int y, Canvas myCanvas) : base(color, x, y, $"pack://application:,,,/Image/Pawn {(color ? "White" : "Black")} Outline 288px.png")
         {
             MyCanvas = myCanvas;
         }
-
         public override bool IsAttacking(int targetX, int targetY)
         {
             int direction = Color ? -1 : 1;
@@ -27,7 +35,6 @@ namespace kursach_wpf.framework
             return (targetX == X + 1 && targetY == Y + direction) ||
                    (targetX == X - 1 && targetY == Y + direction);
         }
-
         public override void MoveFigure()
         {
             if (!board.IsKingInCheck(Color)) 
@@ -39,7 +46,6 @@ namespace kursach_wpf.framework
 
             DefensiveMoves();
         }
-
         private void DefensiveMoves()
         {
             var king = board.GetKing(Color);
@@ -71,7 +77,6 @@ namespace kursach_wpf.framework
                 }
             }
         }
-
         public override void FillArrayAttacksCell()
         {
             int direction = (Color) ? -1 : 1;
@@ -87,7 +92,6 @@ namespace kursach_wpf.framework
             }
         
         }
-
         private void StandardMoves()
         {
             int direction = (Color) ? -1 : 1; 
@@ -122,7 +126,6 @@ namespace kursach_wpf.framework
                 HandlePawnPromotion();
             }
         }
-
         private async Task HandlePawnPromotion()
         {
             var choosingFigure = new ChoosingFigure(Color, MyCanvas);

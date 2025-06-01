@@ -13,19 +13,16 @@ namespace kursach_wpf.framework
         {
 
         }
-
         public Knight(bool color, int x, int y) : base(color, x, y, $"pack://application:,,,/Image/Knight {(color ? "White" : "Black")} Outline 288px.png")
         {
 
         }
-
         public override bool IsAttacking(int targetX, int targetY)
         {
             int dx = Math.Abs(targetX - X);
             int dy = Math.Abs(targetY - Y);
             return (dx == 1 && dy == 2) || (dx == 2 && dy == 1);
         }
-
         public override void MoveFigure()
         {
             if (!board.IsKingInCheck(Color))
@@ -51,6 +48,7 @@ namespace kursach_wpf.framework
             board.AddMarker(X - 2, Y - 1, Color);
         }
         
+
         private void DefensiveMoves()
         {
             var king = board.GetKing(Color);

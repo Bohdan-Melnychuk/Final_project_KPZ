@@ -25,9 +25,6 @@ namespace kursach_wpf.framework
 
         public bool Color;
         public int X, Y;
-        public abstract bool IsAttacking(int targetX, int targetY);
-        public abstract void MoveFigure();
-        public abstract void FillArrayAttacksCell();
 
         public Figure(bool color, string patch)
         {
@@ -36,7 +33,6 @@ namespace kursach_wpf.framework
             ImageFigure.Width = ImageFigure.Height = 80;
             Canvas.SetZIndex(ImageFigure, 1);
         }
-
         public Figure(bool color, int x, int y, string patch)
         {
             Color = color;
@@ -45,7 +41,9 @@ namespace kursach_wpf.framework
             ImageFigure.Width = ImageFigure.Height = 80;
             Canvas.SetZIndex(ImageFigure, 1);
         }
-
+        public abstract bool IsAttacking(int targetX, int targetY);
+        public abstract void MoveFigure();
+        public abstract void FillArrayAttacksCell();
         public bool CheckCell(int x, int y)
         {
             if (!(x <= 7 && y >= 0 && x >= 0 && y <= 7))
@@ -77,7 +75,6 @@ namespace kursach_wpf.framework
 
             return Enemy;
         }
-
         public virtual bool CanMoveTo(int targetX, int targetY)
         {
             if (targetX < 0 || targetX >= board.boardSize || targetY < 0 || targetY >= board.boardSize)
@@ -95,12 +92,10 @@ namespace kursach_wpf.framework
 
             return true;
         }
-
         protected virtual bool CanReach(int targetX, int targetY)
         {
             return IsAttacking(targetX, targetY);
         }
-
         protected bool WouldKingBeInCheck(int targetX, int targetY)
         {
             var originalFigure = board.ArrFigure[targetX, targetY];
@@ -115,7 +110,6 @@ namespace kursach_wpf.framework
 
             return isCheck;
         }
-
         protected bool IsBlockedPath(int startX, int startY, int endX, int endY)
         {
             int dx = Math.Sign(endX - startX);
@@ -135,7 +129,6 @@ namespace kursach_wpf.framework
 
             return false;
         }
-
         public List<(int x, int y)> GetLineToTarget( int targetX, int targetY)
         {
             var line = new List<(int x, int y)>();
@@ -157,7 +150,6 @@ namespace kursach_wpf.framework
 
             return line;
         }
-
         protected void ScanDiagonal(int startX, int startY, int stepX, int stepY, bool Move = false)
         {
             for (int x = startX + stepX, y = startY + stepY;
@@ -171,7 +163,6 @@ namespace kursach_wpf.framework
                 if (board.ArrFigure[x, y] != null) break;
             }
         }
-
         protected void ScanStraight(int startX, int startY, int stepX, int stepY, bool Move = false)
         {
             for (int x = startX + stepX, y = startY + stepY;

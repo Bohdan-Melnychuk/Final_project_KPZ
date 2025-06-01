@@ -1,13 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Xml.Linq;
 
 namespace kursach_wpf.framework
 {
@@ -28,6 +36,10 @@ namespace kursach_wpf.framework
         private int halfMoveClock = 0;
 
         Rectangle ramka = new Rectangle();
+
+
+        
+
 
         private DispatcherTimer whiteTimer;
         private DispatcherTimer blackTimer;
@@ -100,9 +112,7 @@ namespace kursach_wpf.framework
             else
             {
                 whiteTimer.Stop();
-                var page = new Page1('t');
-                Application.Current.MainWindow.Content = page;
-                window.Close();
+                MessageBox.Show("Black wins on time!");
             }
         }
 
@@ -116,9 +126,7 @@ namespace kursach_wpf.framework
             else
             {
                 blackTimer.Stop();
-                var page = new Page1('r');
-                Application.Current.MainWindow.Content = page;
-                window.Close();
+                MessageBox.Show("White wins on time!");
             }
         }
 
@@ -140,6 +148,14 @@ namespace kursach_wpf.framework
             }
             isWhiteTurn = !isWhiteTurn;
         }
+
+
+
+
+
+
+
+
 
         public void StartPositionFigure()
         {

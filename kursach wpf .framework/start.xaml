@@ -1,0 +1,361 @@
+﻿<Window
+    x:Class="ChessGame.Start"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Шахи - Головне меню"
+    Width="900"
+    Height="650"
+    AllowsTransparency="True"
+    Background="Transparent"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Normal"
+    WindowStyle="None">
+
+    <Window.Resources>
+        <!--  Стиль для головних кнопок  -->
+        <Style x:Key="MainButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="280" />
+            <Setter Property="Height" Value="65" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="#8B4513" />
+                        <GradientStop Offset="1" Color="#654321" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="#F5DEB3" />
+            <Setter Property="BorderBrush" Value="#A0522D" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="12">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Border.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="8"
+                                    Direction="270"
+                                    ShadowDepth="4"
+                                    Color="#3E2723" />
+                            </Border.Effect>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                            <GradientStop Offset="0" Color="#A0522D" />
+                                            <GradientStop Offset="1" Color="#8B4513" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#CD853F" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                            <GradientStop Offset="0" Color="#654321" />
+                                            <GradientStop Offset="1" Color="#5D4037" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--  Стиль для кнопки "Почати гру"  -->
+        <Style
+            x:Key="StartButtonStyle"
+            BasedOn="{StaticResource MainButtonStyle}"
+            TargetType="Button">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="#228B22" />
+                        <GradientStop Offset="1" Color="#006400" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush" Value="#32CD32" />
+        </Style>
+
+        <!--  Стиль для кнопки "Вихід"  -->
+        <Style
+            x:Key="ExitButtonStyle"
+            BasedOn="{StaticResource MainButtonStyle}"
+            TargetType="Button">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="#CD5C5C" />
+                        <GradientStop Offset="1" Color="#B22222" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush" Value="#DC143C" />
+        </Style>
+
+        <!--  Анімація появи  -->
+        <Storyboard x:Key="FadeInAnimation">
+            <DoubleAnimation
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:2" />
+            <DoubleAnimation
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                From="30"
+                To="0"
+                Duration="0:0:1.5" />
+        </Storyboard>
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource FadeInAnimation}" />
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Grid RenderTransformOrigin="0.5,0.5">
+        <Grid.RenderTransform>
+            <TranslateTransform />
+        </Grid.RenderTransform>
+
+        <!--  Теплий градієнтний фон що нагадує шахову дошку  -->
+        <Grid>
+            <Grid.Background>
+                <RadialGradientBrush>
+                    <GradientStop Offset="0" Color="#1A0F0A" />
+                    <GradientStop Offset="0.7" Color="#2D1B0E" />
+                    <GradientStop Offset="1" Color="#0F0A08" />
+                </RadialGradientBrush>
+            </Grid.Background>
+        </Grid>
+
+        <!--  Декоративні лінії у теплих тонах  -->
+        <Canvas>
+            <Line
+                Opacity="0.4"
+                Stroke="#8B4513"
+                StrokeThickness="1"
+                X1="0"
+                X2="900"
+                Y1="200"
+                Y2="200" />
+            <Line
+                Opacity="0.4"
+                Stroke="#8B4513"
+                StrokeThickness="1"
+                X1="0"
+                X2="900"
+                Y1="450"
+                Y2="450" />
+            <Line
+                Opacity="0.4"
+                Stroke="#8B4513"
+                StrokeThickness="1"
+                X1="200"
+                X2="200"
+                Y1="0"
+                Y2="650" />
+            <Line
+                Opacity="0.4"
+                Stroke="#8B4513"
+                StrokeThickness="1"
+                X1="700"
+                X2="700"
+                Y1="0"
+                Y2="650" />
+        </Canvas>
+
+        <!--  Головний контейнер  -->
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <!--  Декоративні шахові фігури вгорі  -->
+            <StackPanel
+                Margin="0,0,0,30"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <TextBlock
+                    Margin="20,0"
+                    FontSize="40"
+                    Foreground="#654321"
+                    Text="♜" />
+                <TextBlock
+                    Margin="20,0"
+                    FontSize="40"
+                    Foreground="#8B4513"
+                    Text="♞" />
+                <TextBlock
+                    Margin="20,0"
+                    FontSize="50"
+                    Foreground="#A0522D"
+                    Text="♛" />
+                <TextBlock
+                    Margin="20,0"
+                    FontSize="50"
+                    Foreground="#CD853F"
+                    Text="♚" />
+                <TextBlock
+                    Margin="20,0"
+                    FontSize="40"
+                    Foreground="#8B4513"
+                    Text="♝" />
+                <TextBlock
+                    Margin="20,0"
+                    FontSize="40"
+                    Foreground="#654321"
+                    Text="♜" />
+            </StackPanel>
+
+            <!--  Заголовок  -->
+            <TextBlock
+                Margin="0,0,0,15"
+                HorizontalAlignment="Center"
+                FontFamily="Arial Black"
+                FontSize="42"
+                FontWeight="Bold"
+                Foreground="#F5DEB3"
+                Text="ГРА В ШАХИ">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        BlurRadius="8"
+                        Direction="270"
+                        Opacity="0.7"
+                        ShadowDepth="3"
+                        Color="#FF6B35" />
+                </TextBlock.Effect>
+            </TextBlock>
+
+            <!--  Підзаголовок  -->
+
+
+            <!--  Панель кнопок  -->
+            <StackPanel HorizontalAlignment="Center">
+
+                <!--  Кнопка "Почати гру"  -->
+                <Button
+                    x:Name="StartGameButton"
+                    Click="StartGameButton_Click"
+                    Content="🎮 ПОЧАТИ ГРУ"
+                    Style="{StaticResource StartButtonStyle}" />
+
+                <!--  Кнопка "Вихід"  -->
+                <Button
+                    x:Name="ExitButton"
+                    Click="ExitButton_Click"
+                    Content="✕ ВИХІД"
+                    Style="{StaticResource ExitButtonStyle}" />
+            </StackPanel>
+
+            <!--  Декоративні шахові фігури внизу  -->
+            <StackPanel
+                Margin="0,30,0,0"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <TextBlock
+                    Margin="15,0"
+                    FontSize="30"
+                    Foreground="#A0522D"
+                    Text="♟" />
+                <TextBlock
+                    Margin="15,0"
+                    FontSize="30"
+                    Foreground="#A0522D"
+                    Text="♟" />
+                <TextBlock
+                    Margin="15,0"
+                    FontSize="30"
+                    Foreground="#A0522D"
+                    Text="♟" />
+                <TextBlock
+                    Margin="15,0"
+                    FontSize="30"
+                    Foreground="#A0522D"
+                    Text="♟" />
+                <TextBlock
+                    Margin="15,0"
+                    FontSize="30"
+                    Foreground="#A0522D"
+                    Text="♟" />
+                <TextBlock
+                    Margin="15,0"
+                    FontSize="30"
+                    Foreground="#A0522D"
+                    Text="♟" />
+                <TextBlock
+                    Margin="15,0"
+                    FontSize="30"
+                    Foreground="#A0522D"
+                    Text="♟" />
+                <TextBlock
+                    Margin="15,0"
+                    FontSize="30"
+                    Foreground="#A0522D"
+                    Text="♟" />
+            </StackPanel>
+        </StackPanel>
+
+        <!--  Інформаційна панель  -->
+
+
+        <!--  Кнопка закриття  -->
+        <Button
+            x:Name="CloseButton"
+            Width="35"
+            Height="35"
+            Margin="0,15,15,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Background="#8B4513"
+            BorderBrush="#A0522D"
+            BorderThickness="1"
+            Click="CloseButton_Click"
+            Content="×"
+            Cursor="Hand"
+            FontSize="20"
+            FontWeight="Bold"
+            Foreground="#F5DEB3">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="17">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#CD5C5C" />
+                                        <Setter Property="BorderBrush" Value="#DC143C" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+
+    </Grid>
+</Window>

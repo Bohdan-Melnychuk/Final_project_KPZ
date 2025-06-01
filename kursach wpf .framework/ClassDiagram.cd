@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="kursach_wpf.framework.Bishop">
+    <Position X="0.5" Y="6" Width="2" />
+    <InheritanceLine Type="kursach_wpf.framework.Figure" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.5" Y="5.324" />
+        <Point X="3.5" Y="5.817" />
+        <Point X="2" Y="5.817" />
+        <Point X="2" Y="6" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAgAAAAMAQAAA=</HashCode>
+      <FileName>Bishop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="kursach_wpf.framework.Board">
+    <Position X="14.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>ANAAAAAgSQAACIAAIAEhCAQqCwEgDEAKAQQABABWAgA=</HashCode>
+      <FileName>Board.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="kursach_wpf.framework.Cell">
+    <Position X="11.5" Y="7.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="kursach_wpf.framework.ChoosingFigure" BaseTypeListCollapsed="true">
+    <Position X="8.75" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAgAAAACQAAAAAAAAAAAAQRAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChoosingFigure.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="kursach_wpf.framework.Figure">
+    <Position X="3.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIEAAAAABgQAAAAAAAAABAAAAAAACAAIACggGARYAI=</HashCode>
+      <FileName>Figure.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="kursach_wpf.framework.King">
+    <Position X="6" Y="0.5" Width="2" />
+    <InheritanceLine Type="kursach_wpf.framework.Figure" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.25" Y="1.125" />
+        <Point X="5.625" Y="1.125" />
+        <Point X="5.625" Y="1.125" />
+        <Point X="6" Y="1.125" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAABCAAAAgAAAAAAAAgAAAAIAAAAAAAAQCEEEAQAAA=</HashCode>
+      <FileName>King.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="kursach_wpf.framework.Knight">
+    <Position X="3.25" Y="6" Width="2" />
+    <InheritanceLine Type="kursach_wpf.framework.Figure" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.625" Y="5.324" />
+        <Point X="4.625" Y="5.662" />
+        <Point X="4.625" Y="5.662" />
+        <Point X="4.625" Y="6" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAgAAAAMAQAAA=</HashCode>
+      <FileName>Knight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="kursach_wpf.framework.MainWindow" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="kursach_wpf.framework.Page1" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Page1.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="kursach_wpf.framework.Pawn">
+    <Position X="6" Y="5" Width="2" />
+    <InheritanceLine Type="kursach_wpf.framework.Figure" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.25" Y="4.812" />
+        <Point X="7" Y="4.812" />
+        <Point X="7" Y="5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAACAgAAgAAAAAAAAAAAAAAAAAAAAAgCAAAMAQAAA=</HashCode>
+      <FileName>Pawn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="kursach_wpf.framework.Queen">
+    <Position X="0.5" Y="3.5" Width="2" />
+    <InheritanceLine Type="kursach_wpf.framework.Figure" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.25" Y="3.875" />
+        <Point X="2.75" Y="3.875" />
+        <Point X="2.75" Y="3.875" />
+        <Point X="2.5" Y="3.875" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAgAAAAMAQAAA=</HashCode>
+      <FileName>Queen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="kursach_wpf.framework.Rook">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <InheritanceLine Type="kursach_wpf.framework.Figure" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.25" Y="2" />
+        <Point X="2.5" Y="2" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAgAAAAAAAAAAAAAAAAAAAAAgAAAAMAQAAA=</HashCode>
+      <FileName>Rook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChessGame.Start" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="4.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAgAAAAACAAAAEAAAABAAAAIA=</HashCode>
+      <FileName>start.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

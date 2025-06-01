@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 
 namespace kursach_wpf.framework
@@ -11,8 +12,10 @@ namespace kursach_wpf.framework
         {
             InitializeComponent();
             board.MyCanvas = MyCanvas;
+            board.window = this;
             board.GenerateChessBoard();
             board.StartPositionFigure();
+            board.InitializeTimers(TimeSpan.FromMinutes(5));
         }
     }
 }

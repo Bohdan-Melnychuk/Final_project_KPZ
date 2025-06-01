@@ -9,44 +9,77 @@ namespace kursach_wpf.framework
 {
     public class Rook : Figure
     {
+        public bool FirstMove = true;
+
         public Rook(bool color) : base(color, $"pack://application:,,,/Image/Rook {(color ? "White" : "Black")} Outline 288px.png")
         {
-
+            
         }
+
         public Rook(bool color, int x, int y) : base(color, x, y, $"pack://application:,,,/Image/Rook {(color ? "White" : "Black")} Outline 288px.png")
         {
-
+            
         }
-        public override void MoveFigure(Board board)
+
+        public override bool IsAttacking(int targetX, int targetY)
         {
-            for (int i = X + 1; i < board.boardSize; i++) // Вправо
+            return (targetX == X || targetY == Y) && !IsBlockedPath(X, Y, targetX, targetY);
+        }
+
+        public override void MoveFigure()
+        {
+            if (!board.IsKingInCheck(Color))
             {
-                if (board.AddMarker(i, Y, board.ArrFigure[X, Y].Color))
+                StandardMoves();
+                return;
+            }
+            DefensiveMoves();
+        }
+
+        private void DefensiveMoves()
+        {
+            var king = board.GetKing(Color);
+            var attackers = board.GetAttackers(king.X, king.Y, Color);
+
+            if (attackers.Count > 1)
+                return;
+
+            var attacker = attackers[0];
+
+            if (CanReach(attacker.X, attacker.Y) &&
+                (board.ArrFigure[attacker.X, attacker.Y] == null ||
+                 board.ArrFigure[attacker.X, attacker.Y].Color != Color))
+            {
+                board.AddMarker(attacker.X, attacker.Y, Color);
+            }
+
+            if (attacker is Rook || attacker is Bishop || attacker is Queen)
+            {
+                var path = board.GetPathBetween(attacker.X, attacker.Y, king.X, king.Y);
+                foreach (var (x, y) in path)
                 {
-                    break;
+                    if (CanReach(x, y) && board.ArrFigure[x, y] == null)
+                    {
+                        board.AddMarker(x, y, Color);
+                    }
                 }
             }
-            for (int i = Y + 1; i < board.boardSize; i++) // Вниз
-            {
-                if (board.AddMarker(X, i, board.ArrFigure[X, Y].Color))
-                {
-                    break;
-                }
-            }
-            for (int i = X - 1; i >= 0; i--) // Вліво
-            {
-                if (board.AddMarker(i, Y, board.ArrFigure[X, Y].Color))
-                {
-                    break;
-                }
-            }
-            for (int i = Y - 1; i >= 0; i--) // Вверх
-            {
-                if (board.AddMarker(X, i, board.ArrFigure[X, Y].Color))
-                {
-                    break;
-                }
-            }
+        }
+
+        private void StandardMoves()
+        {
+            ScanStraight(X, Y, 1, 0, true);   // Вправо
+            ScanStraight(X, Y, -1, 0, true);  // Вліво
+            ScanStraight(X, Y, 0, 1, true);   // Вниз
+            ScanStraight(X, Y, 0, -1, true);  // Вверх
+        }
+
+        public override void FillArrayAttacksCell()
+        {
+            ScanStraight(X, Y, 1, 0);
+            ScanStraight(X, Y, -1, 0);
+            ScanStraight(X, Y, 0, 1);
+            ScanStraight(X, Y, 0, -1);
         }
     }
 }
