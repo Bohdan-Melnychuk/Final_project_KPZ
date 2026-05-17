@@ -1,65 +1,65 @@
 # ♟️ Chess WPF
 
-A two-player chess game built with **C# and WPF (.NET Framework)**, featuring full chess rules, a graphical interface, and a countdown timer for each player.
+Двогравцева шахова гра, написана на **C# та WPF (.NET Framework)**, з повною реалізацією правил шахів, графічним інтерфейсом та таймером відліку часу для кожного гравця.
 
 ---
 
-## 🚀 How to Run Locally
+## 🚀 Як запустити локально
 
-1. Clone the repository:
+1. Клонуй репозиторій:
    ```bash
    git clone https://github.com/Bohdan-Melnychuk/Final_project_KPZ.git
    ```
-2. Open `kursach wpf .framework.sln` in **Visual Studio 2022**
-3. Set `kursach wpf .framework` as the startup project
-4. Press **F5** to build and run
+2. Відкрий `kursach wpf .framework.sln` у **Visual Studio 2022**
+3. Встанови `kursach wpf .framework` як стартовий проєкт
+4. Натисни **F5** для збірки та запуску
 
-**Requirements:** Visual Studio 2022, .NET Framework 4.7.2
-
----
-
-## 🎮 Features
-
-### User Interface
-- **Start screen** — launch game or exit with confirmation dialog ([start.xaml.cs](kursach%20wpf%20.framework/start.xaml.cs))
-- **Chessboard** — rendered on WPF Canvas with alternating colored tiles and a decorative frame ([Board.cs](kursach%20wpf%20.framework/Board.cs))
-- **Move markers** — dots for valid moves, attack icons for enemy captures, red highlight when King is in check ([Board.cs](kursach%20wpf%20.framework/Board.cs))
-- **Pawn promotion dialog** — interactive popup to choose Queen, Rook, Bishop, or Knight ([ChoosingFigure.xaml.cs](kursach%20wpf%20.framework/ChoosingFigure.xaml.cs))
-- **Game result screen** — displays winner or draw with a return-to-menu button ([Page1.xaml.cs](kursach%20wpf%20.framework/Page1.xaml.cs))
-
-### Chess Logic
-- All 6 piece types with correct movement rules: King, Queen, Rook, Bishop, Knight, Pawn ([King.cs](kursach%20wpf%20.framework/King.cs), [Queen.cs](kursach%20wpf%20.framework/Queen.cs), [Rook.cs](kursach%20wpf%20.framework/Rook.cs), [Bishop.cs](kursach%20wpf%20.framework/Bishop.cs), [Knight.cs](kursach%20wpf%20.framework/Knight.cs), [Pawn.cs](kursach%20wpf%20.framework/Pawn.cs))
-- **Check detection** — all moves that leave the King in check are blocked ([Figure.cs](kursach%20wpf%20.framework/Figure.cs))
-- **Checkmate & stalemate detection** ([Board.cs](kursach%20wpf%20.framework/Board.cs))
-- **Castling** — both kingside and queenside ([King.cs](kursach%20wpf%20.framework/King.cs))
-- **Pawn promotion** — async dialog on reaching the last rank ([Pawn.cs](kursach%20wpf%20.framework/Pawn.cs))
-- **Draw conditions** — insufficient material (≤3 pieces) and 50-move rule ([Board.cs](kursach%20wpf%20.framework/Board.cs))
-
-### Timer
-- Each player has a **5-minute countdown** timer displayed on screen
-- Timers switch automatically after each move
-- Time running out triggers an immediate win for the opponent ([Board.cs](kursach%20wpf%20.framework/Board.cs))
+**Вимоги:** Visual Studio 2022, .NET Framework 4.7.2
 
 ---
 
-## 🏗️ Project Structure
+## 🎮 Функціональність
+
+### Інтерфейс користувача
+- **Стартовий екран** — запуск гри або вихід з діалогом підтвердження ([start.xaml.cs](kursach%20wpf%20.framework/start.xaml.cs))
+- **Шахова дошка** — відмальована на WPF Canvas з кольоровими клітинками та декоративною рамкою ([Board.cs, рядки 187–215](kursach%20wpf%20.framework/Board.cs#L187-L215))
+- **Маркери ходів** — точки для доступних ходів, іконки атаки для захоплення ворожих фігур, червона підсвітка при шаху королю ([Board.cs, рядки 256–295](kursach%20wpf%20.framework/Board.cs#L256-L295))
+- **Діалог перетворення пішака** — інтерактивне вікно вибору фігури: Ферзь, Тура, Слон або Кінь ([ChoosingFigure.xaml.cs, рядки 29–31](kursach%20wpf%20.framework/ChoosingFigure.xaml.cs#L29-L31))
+- **Екран результату** — відображає переможця або нічию з кнопкою повернення в меню ([Page1.xaml.cs](kursach%20wpf%20.framework/Page1.xaml.cs))
+
+### Шахова логіка
+- Усі 6 типів фігур з правильними правилами ходів: Король, Ферзь, Тура, Слон, Кінь, Пішак
+- **Виявлення шаху** — усі ходи що залишають Короля під шахом заблоковані ([Figure.cs, рядки 93–95](kursach%20wpf%20.framework/Figure.cs#L93-L95))
+- **Виявлення мату та пату** ([Board.cs, рядки 473–476](kursach%20wpf%20.framework/Board.cs#L473-L476))
+- **Рокіровка** — коротка та довга ([King.cs, рядки 155–188](kursach%20wpf%20.framework/King.cs#L155-L188))
+- **Перетворення пішака** — асинхронний діалог при досягненні останньої горизонталі ([Pawn.cs, рядки 126–147](kursach%20wpf%20.framework/Pawn.cs#L126-L147))
+- **Умови нічиї** — недостатній матеріал (≤3 фігури) та правило 50 ходів ([Board.cs, рядки 539–554](kursach%20wpf%20.framework/Board.cs#L539-L554))
+
+### Таймер
+- Кожен гравець має **5-хвилинний таймер** зворотнього відліку ([Board.cs, рядки 40–87](kursach%20wpf%20.framework/Board.cs#L40-L87))
+- Таймери перемикаються автоматично після кожного ходу ([Board.cs, рядки 127–140](kursach%20wpf%20.framework/Board.cs#L127-L140))
+- Закінчення часу викликає миттєву перемогу суперника ([Board.cs, рядки 95–125](kursach%20wpf%20.framework/Board.cs#L95-L125))
+
+---
+
+## 🏗️ Структура проєкту
 
 ```
 kursach wpf .framework/
-├── Figure.cs              # Abstract base class for all chess pieces
-├── Board.cs               # Game board, move logic, timer, game state
-├── Cell.cs                # Board cell representation
-├── King.cs                # King movement, castling, check avoidance
-├── Queen.cs               # Queen movement and defensive logic
-├── Rook.cs                # Rook movement
-├── Bishop.cs              # Bishop movement
-├── Knight.cs              # Knight movement
-├── Pawn.cs                # Pawn movement, promotion
-├── MainWindow.xaml(.cs)   # Main game window
-├── start.xaml(.cs)        # Start screen
-├── Page1.xaml(.cs)        # Game result screen
-├── ChoosingFigure.xaml.cs # Pawn promotion dialog
-└── Image/                 # PNG icons for all chess pieces
+├── Figure.cs              # Абстрактний базовий клас для всіх шахових фігур
+├── Board.cs               # Дошка, логіка ходів, таймер, стан гри
+├── Cell.cs                # Представлення клітинки дошки
+├── King.cs                # Рух короля, рокіровка, уникнення шаху
+├── Queen.cs               # Рух ферзя та захисна логіка
+├── Rook.cs                # Рух тури
+├── Bishop.cs              # Рух слона
+├── Knight.cs              # Рух коня
+├── Pawn.cs                # Рух пішака, перетворення
+├── MainWindow.xaml(.cs)   # Головне вікно гри
+├── start.xaml(.cs)        # Стартовий екран
+├── Page1.xaml(.cs)        # Екран результату гри
+├── ChoosingFigure.xaml.cs # Діалог перетворення пішака
+└── Image/                 # PNG іконки для всіх шахових фігур
 ```
 
 ---
@@ -67,64 +67,93 @@ kursach wpf .framework/
 ## 🧩 Design Patterns
 
 ### 1. Template Method — [`Figure.cs`](kursach%20wpf%20.framework/Figure.cs)
-The abstract class `Figure` defines the skeleton algorithm for move validation in `CanMoveTo()`:
-1. Check board boundaries
-2. Check friendly piece collision
-3. Call abstract `CanReach()` (overridden per piece)
-4. Simulate move and check if King would be in check via `WouldKingBeInCheck()`
 
-Each piece subclass overrides only `CanReach()` and `MoveFigure()`, keeping the validation algorithm centralized.
+Абстрактний клас `Figure` визначає скелет алгоритму валідації ходу у методі [`CanMoveTo()` (рядки 81–97)](kursach%20wpf%20.framework/Figure.cs#L81-L97):
+1. Перевірка меж дошки
+2. Перевірка зіткнення зі своєю фігурою
+3. Виклик абстрактного [`CanReach()` (рядок 99)](kursach%20wpf%20.framework/Figure.cs#L99) — перевизначається у кожному підкласі
+4. Симуляція ходу через [`WouldKingBeInCheck()` (рядки 104–117)](kursach%20wpf%20.framework/Figure.cs#L104-L117) — перевіряє чи Король залишився б під шахом
+
+Абстрактні методи що зобов'язані реалізувати всі підкласи оголошені на [рядках 28–30](kursach%20wpf%20.framework/Figure.cs#L28-L30). Підкласи перевизначають лише потрібні кроки, не змінюючи загальний алгоритм.
 
 ### 2. Strategy — [`Queen.cs`](kursach%20wpf%20.framework/Queen.cs), [`Rook.cs`](kursach%20wpf%20.framework/Rook.cs), [`Bishop.cs`](kursach%20wpf%20.framework/Bishop.cs), [`Knight.cs`](kursach%20wpf%20.framework/Knight.cs), [`Pawn.cs`](kursach%20wpf%20.framework/Pawn.cs)
-Each piece implements its own `MoveFigure()` strategy, switching between `StandardMoves()` and `DefensiveMoves()` depending on whether the King is in check. The `Board` calls `MoveFigure()` uniformly through the `Figure` interface, unaware of the concrete strategy.
+
+Кожна фігура реалізує власну стратегію руху у `MoveFigure()`, перемикаючись між двома алгоритмами залежно від стану гри:
+- [`StandardMoves()` (Queen.cs, рядки 68–79)](kursach%20wpf%20.framework/Queen.cs#L68-L79) — звичайні ходи коли Король не під шахом
+- [`DefensiveMoves()` (Queen.cs, рядки 38–66)](kursach%20wpf%20.framework/Queen.cs#L38-L66) — захисні ходи коли Король під шахом
+
+Перемикання між стратегіями відбувається через перевірку [`IsKingInCheck()` (Queen.cs, рядок 30)](kursach%20wpf%20.framework/Queen.cs#L30). `Board` викликає `MoveFigure()` однаково для всіх фігур ([Board.cs, рядок 475](kursach%20wpf%20.framework/Board.cs#L475)), не знаючи конкретної стратегії кожної фігури.
 
 ### 3. Composite — [`Board.cs`](kursach%20wpf%20.framework/Board.cs)
-The `Board` manages the entire collection of `Figure` objects via `ArrFigure[,]` and treats them uniformly through the abstract `Figure` interface — calling `FillArrayAttacksCell()`, `MoveFigure()`, and `IsAttacking()` on all pieces without knowing their concrete types. `GetAllFigures()` returns a flat list for uniform iteration.
+
+`Board` керує всією колекцією `Figure` та взаємодіє з ними однаково через абстрактний клас:
+- [`GetAllFigures()` (рядки 426–454)](kursach%20wpf%20.framework/Board.cs#L426-L454) — повертає плаский список усіх фігур для однорідної ітерації
+- [`RefreshAllAttackCell()` (рядки 363–375)](kursach%20wpf%20.framework/Board.cs#L363-L375) — викликає `FillArrayAttacksCell()` на кожній фігурі без знання їхніх конкретних типів
+- [`IsSquareUnderAttack()` (рядки 378–390)](kursach%20wpf%20.framework/Board.cs#L378-L390) — викликає `IsAttacking()` на всіх фігурах поліморфно
 
 ---
 
 ## 🔧 Programming Principles
 
 ### 1. Single Responsibility Principle (SRP)
-Each class has one reason to change:
-- `Figure` — piece data and movement validation only ([Figure.cs](kursach%20wpf%20.framework/Figure.cs))
-- `Board` — board state, rendering, and game flow ([Board.cs](kursach%20wpf%20.framework/Board.cs))
-- `ChoosingFigure` — pawn promotion UI only ([ChoosingFigure.xaml.cs](kursach%20wpf%20.framework/ChoosingFigure.xaml.cs))
-- `Page1` — result display only ([Page1.xaml.cs](kursach%20wpf%20.framework/Page1.xaml.cs))
+
+Кожен клас має одну причину для зміни:
+- `Figure` — лише дані фігури та валідація ходу ([Figure.cs, рядки 17–184](kursach%20wpf%20.framework/Figure.cs#L17-L184))
+- `Board` — лише стан дошки, рендеринг та ігровий процес ([Board.cs](kursach%20wpf%20.framework/Board.cs))
+- `ChoosingFigure` — лише UI перетворення пішака ([ChoosingFigure.xaml.cs, рядки 29–93](kursach%20wpf%20.framework/ChoosingFigure.xaml.cs#L29-L93))
+- `Page1` — лише відображення результату гри ([Page1.xaml.cs](kursach%20wpf%20.framework/Page1.xaml.cs))
 
 ### 2. Open/Closed Principle (OCP)
-`Figure` is open for extension (new piece types) but closed for modification. Adding a new piece (e.g. `Archbishop`) requires only creating a new subclass and overriding `IsAttacking()`, `MoveFigure()`, and `FillArrayAttacksCell()` — no changes to `Board` or existing pieces. ([Figure.cs](kursach%20wpf%20.framework/Figure.cs))
+
+`Figure` відкритий для розширення, але закритий для модифікації. Абстрактні методи [`IsAttacking()`, `MoveFigure()`, `FillArrayAttacksCell()` (рядки 28–30)](kursach%20wpf%20.framework/Figure.cs#L28-L30) дозволяють додати нову фігуру лише через створення нового підкласу — без жодних змін у `Board` або існуючих фігурах.
 
 ### 3. Liskov Substitution Principle (LSP)
-All piece subclasses (`King`, `Queen`, `Rook`, `Bishop`, `Knight`, `Pawn`) can be used anywhere a `Figure` is expected. `Board.GetAllFigures()` returns `List<Figure>` and calls virtual methods polymorphically without needing to know concrete types. ([Board.cs](kursach%20wpf%20.framework/Board.cs))
+
+Всі підкласи `Figure` можна використовувати там де очікується `Figure`. `Board` зберігає всі фігури у масиві [`ArrFigure[,]` (рядок 13)](kursach%20wpf%20.framework/Board.cs#L13) типу `Figure[,]` та отримує їх через [`GetAllFigures()` (рядок 426)](kursach%20wpf%20.framework/Board.cs#L426) — працюючи з ними поліморфно через `IsAttacking()` та `MoveFigure()` без перевірки конкретного типу.
 
 ### 4. DRY (Don't Repeat Yourself)
-Shared movement scanning logic is extracted into `ScanDiagonal()` and `ScanStraight()` in the base `Figure` class, reused by Queen, Rook, and Bishop without duplication. `CheckCell()` centralizes boundary and collision checking. ([Figure.cs](kursach%20wpf%20.framework/Figure.cs))
+
+Спільна логіка сканування напрямків винесена у базовий клас і не дублюється у жодній фігурі:
+- [`ScanDiagonal()` (рядки 161–172)](kursach%20wpf%20.framework/Figure.cs#L161-L172) — спільний для Ферзя і Слона
+- [`ScanStraight()` (рядки 175–184)](kursach%20wpf%20.framework/Figure.cs#L175-L184) — спільний для Ферзя і Тури
+- [`CheckCell()` (рядки 49–79)](kursach%20wpf%20.framework/Figure.cs#L49-L79) — централізована перевірка меж та зіткнень для всіх фігур
 
 ### 5. Fail Fast
-`WouldKingBeInCheck()` simulates a move on the board, immediately checks if it leaves the King in check, and reverts — blocking invalid moves before they are shown to the player. ([Figure.cs](kursach%20wpf%20.framework/Figure.cs))
+
+[`WouldKingBeInCheck()` (рядки 104–117)](kursach%20wpf%20.framework/Figure.cs#L104-L117) симулює хід на дошці, одразу перевіряє чи Король опиниться під шахом і скасовує симуляцію. Якщо так — хід негайно відхиляється у [`CanMoveTo()` (рядок 93)](kursach%20wpf%20.framework/Figure.cs#L93) ще до відображення маркера гравцю.
 
 ### 6. Separation of Concerns
-Game logic (`Board`, `Figure` subclasses) is fully separated from UI (`MainWindow`, `Page1`, `start`). The board renders markers and figures on a WPF Canvas but delegates all chess rules to the model layer.
+
+Ігрова логіка повністю відокремлена від UI. `Figure` та підкласи містять лише правила шахів. `Board` відповідає за стан гри та рендеринг маркерів на Canvas. `MainWindow`, `Page1`, `start` — лише UI без жодної ігрової логіки. Таймер інкапсульований у `Board` через [`InitializeTimers()` (рядки 40–87)](kursach%20wpf%20.framework/Board.cs#L40-L87).
 
 ---
 
 ## 🔨 Refactoring Techniques
 
 ### 1. Extract Method
-Long movement logic in each piece was split into private `StandardMoves()` and `DefensiveMoves()` methods, and shared scanning was extracted into `ScanDiagonal()` / `ScanStraight()` in the base class. ([Figure.cs](kursach%20wpf%20.framework/Figure.cs), [Queen.cs](kursach%20wpf%20.framework/Queen.cs))
+
+Довга логіка ходів розбита на приватні методи у кожній фігурі:
+- [`StandardMoves()` та `DefensiveMoves()` (Queen.cs, рядки 38–79)](kursach%20wpf%20.framework/Queen.cs#L38-L79)
+- Спільне сканування винесено у [`ScanDiagonal()` та `ScanStraight()` (Figure.cs, рядки 161–184)](kursach%20wpf%20.framework/Figure.cs#L161-L184)
 
 ### 2. Extract Superclass
-Common fields (`Color`, `X`, `Y`, `ImageFigure`, `CellsUnderAttack`) and shared methods (`CheckCell`, `WouldKingBeInCheck`, `IsBlockedPath`, `ScanDiagonal`, `ScanStraight`) were pulled into the abstract `Figure` base class, eliminating duplication across all 6 piece types. ([Figure.cs](kursach%20wpf%20.framework/Figure.cs))
+
+Спільні поля (`Color`, `X`, `Y`, `ImageFigure`, `CellsUnderAttack`) та методи (`CheckCell`, `WouldKingBeInCheck`, `IsBlockedPath`, `ScanDiagonal`, `ScanStraight`) винесені в абстрактний клас [`Figure` (рядки 17–184)](kursach%20wpf%20.framework/Figure.cs#L17-L184), усуваючи дублювання між усіма 6 типами фігур.
 
 ### 3. Replace Conditional with Polymorphism
-Instead of a large `if/else` or `switch` on piece type for movement and attack logic, each piece class overrides `IsAttacking()`, `MoveFigure()`, and `FillArrayAttacksCell()`. The board calls these methods polymorphically. ([Board.cs](kursach%20wpf%20.framework/Board.cs))
 
-### 4. Introduce Parameter Object
-Move scanning methods use `(startX, startY, stepX, stepY)` as a consistent parameter group representing direction vectors, avoiding scattered individual coordinate arithmetic throughout piece classes. ([Figure.cs](kursach%20wpf%20.framework/Figure.cs))
+Замість великого `switch` на тип фігури — кожен підклас перевизначає `IsAttacking()`, `MoveFigure()` та `FillArrayAttacksCell()`. `Board` викликає ці методи поліморфно через [`RefreshAllAttackCell()` (рядки 363–375)](kursach%20wpf%20.framework/Board.cs#L363-L375) та [`IsSquareUnderAttack()` (рядки 378–390)](kursach%20wpf%20.framework/Board.cs#L378-L390).
+
+### 4. Replace Magic Number with Named Constant
+
+Розмір дошки `8` та розмір клітинки `80` зберігаються як іменовані поля [`boardSize` та `tileSize` (Board.cs, рядки 24–25)](kursach%20wpf%20.framework/Board.cs#L24-L25), що дозволяє змінити розмір дошки в одному місці без пошуку магічних чисел по всьому коду.
 
 ### 5. Separate Query from Modifier
-Read-only queries like `IsAttacking()`, `IsKingInCheck()`, `IsSquareUnderAttack()`, `GetAllFigures()`, `GetKing()` are kept side-effect-free and separate from state-modifying methods like `MoveFigure()` and `RefreshAllAttackCell()`. ([Board.cs](kursach%20wpf%20.framework/Board.cs))
 
-### 6. Replace Magic Number with Named Concept
-Board size `8` is stored as `board.boardSize` and tile size as `board.tileSize`, so resizing the board requires changing only one place. ([Board.cs](kursach%20wpf%20.framework/Board.cs))
+Запити без побічних ефектів відокремлені від модифікуючих методів:
+- Запити: [`IsKingInCheck()` (рядки 420–423)](kursach%20wpf%20.framework/Board.cs#L420-L423), [`GetAllFigures()` (рядки 426–454)](kursach%20wpf%20.framework/Board.cs#L426-L454), [`GetKing()` (рядки 458–470)](kursach%20wpf%20.framework/Board.cs#L458-L470), [`IsSquareUnderAttack()` (рядки 378–390)](kursach%20wpf%20.framework/Board.cs#L378-L390)
+- Модифікатори: [`MoveFigure()` (рядки 298–360)](kursach%20wpf%20.framework/Board.cs#L298-L360), [`RefreshAllAttackCell()` (рядки 363–375)](kursach%20wpf%20.framework/Board.cs#L363-L375)
+
+### 6. Introduce Parameter Object
+
+Методи сканування [`ScanDiagonal()` та `ScanStraight()` (рядки 161–184)](kursach%20wpf%20.framework/Figure.cs#L161-L184) приймають `(startX, startY, stepX, stepY)` — узгоджену групу параметрів що представляє вектор напрямку. Це замінює розкидану арифметику координат у кожній фігурі єдиним стандартним викликом.
