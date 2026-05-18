@@ -24,7 +24,7 @@ namespace kursach_wpf.framework
         public int tileSize = 80;
         public int boardSize = 8;
         public int margin = 50;
-        int ramkaSize = 40; 
+        int ramkaSize = 40;
         private int halfMoveClock = 0;
 
         Rectangle ramka = new Rectangle();
@@ -35,7 +35,7 @@ namespace kursach_wpf.framework
         private TimeSpan blackTimeRemaining;
         private TextBlock whiteTimerText;
         private TextBlock blackTimerText;
-        private bool isWhiteTurn = true; 
+        private bool isWhiteTurn = true;
 
         public void InitializeTimers(TimeSpan initialTime)
         {
@@ -59,7 +59,7 @@ namespace kursach_wpf.framework
             };
 
             Canvas.SetLeft(whiteTimerText, margin + boardSize * tileSize - 350);
-            Canvas.SetTop(whiteTimerText, margin + boardSize * tileSize );
+            Canvas.SetTop(whiteTimerText, margin + boardSize * tileSize);
 
             Canvas.SetLeft(blackTimerText, margin + boardSize * tileSize - 350);
             Canvas.SetTop(blackTimerText, margin - 40 + 3);
@@ -143,32 +143,31 @@ namespace kursach_wpf.framework
 
         public void StartPositionFigure()
         {
-            //Black Pawn
             for (int i = 0; i < 8; i++)
             {
                 ArrFigure[i, 1] = new Pawn(false, i, 1, MyCanvas);
                 ArrFigure[i, 6] = new Pawn(true, i, 6, MyCanvas);
             }
-            ArrFigure[0, 0] = new Rook(false, 0, 0); //Black Rook Left
-            ArrFigure[0, 7] = new Rook(true, 0, 7); //White Rook Left
-            ArrFigure[7, 0] = new Rook(false, 7, 0); // Black Rook Right
-            ArrFigure[7, 7] = new Rook(true, 7, 7); //White Rook Right
-            //Knight
-            ArrFigure[1, 0] = new Knight(false, 1, 0); //Black Knight Left
-            ArrFigure[1, 7] = new Knight(true, 1, 7); //White Kniht Left
-            ArrFigure[6, 0] = new Knight(false, 6, 0); //Black Knight Right
-            ArrFigure[6, 7] = new Knight(true, 6, 7); //White Knight Right
-            //Bishop
-            ArrFigure[2, 0] = new Bishop(false, 2, 0); //Black Bishop Left
-            ArrFigure[2, 7] = new Bishop(true, 2, 7); //White Bishop Left
-            ArrFigure[5, 0] = new Bishop(false, 5, 0); //Black Bishop Right
-            ArrFigure[5, 7] = new Bishop(true, 5, 7); //White Bishop Right
-            //King
-            ArrFigure[4, 0] = new King(false, 4, 0); //Black King
-            ArrFigure[4, 7] = new King(true, 4, 7); //White King
-            //Queen
-            ArrFigure[3, 0] = new Queen(false, 3, 0); //Black Queen
-            ArrFigure[3, 7] = new Queen(true, 3, 7); //White Queen
+            ArrFigure[0, 0] = new Rook(false, 0, 0);
+            ArrFigure[0, 7] = new Rook(true, 0, 7);
+            ArrFigure[7, 0] = new Rook(false, 7, 0);
+            ArrFigure[7, 7] = new Rook(true, 7, 7);
+
+            ArrFigure[1, 0] = new Knight(false, 1, 0);
+            ArrFigure[1, 7] = new Knight(true, 1, 7);
+            ArrFigure[6, 0] = new Knight(false, 6, 0);
+            ArrFigure[6, 7] = new Knight(true, 6, 7);
+
+            ArrFigure[2, 0] = new Bishop(false, 2, 0);
+            ArrFigure[2, 7] = new Bishop(true, 2, 7);
+            ArrFigure[5, 0] = new Bishop(false, 5, 0);
+            ArrFigure[5, 7] = new Bishop(true, 5, 7);
+
+            ArrFigure[4, 0] = new King(false, 4, 0);
+            ArrFigure[4, 7] = new King(true, 4, 7);
+
+            ArrFigure[3, 0] = new Queen(false, 3, 0);
+            ArrFigure[3, 7] = new Queen(true, 3, 7);
 
             for (int i = 0; i < boardSize; i++)
             {
@@ -378,10 +377,10 @@ namespace kursach_wpf.framework
         {
             foreach (var figure in GetAllFigures())
             {
-                if (figure.Color != color) 
+                if (figure.Color != color)
                 {
-                    figure.FillArrayAttacksCell(); 
-                    if (figure.IsAttacking(x, y)) 
+                    figure.FillArrayAttacksCell();
+                    if (figure.IsAttacking(x, y))
                         return true;
                 }
             }
@@ -424,50 +423,17 @@ namespace kursach_wpf.framework
 
         public List<Figure> GetAllFigures()
         {
-            List<Figure> figures = new List<Figure>();
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if (ArrFigure[i, j] != null)
-                    {
-                        figures.Add(ArrFigure[i, j]);
-                    }
-                }
-            }
-            return figures;
+            return ArrFigure.Cast<Figure>().Where(f => f != null).ToList();
         }
 
-        public List<Figure> GetAllFigures(bool Color)
+        public List<Figure> GetAllFigures(bool color)
         {
-            List<Figure> figures = new List<Figure>();
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if (ArrFigure[i, j] != null && ArrFigure[i, j].Color == Color)
-                    {
-                        figures.Add(ArrFigure[i, j]);
-                    }
-                }
-            }
-            return figures;
+            return ArrFigure.Cast<Figure>().Where(f => f != null && f.Color == color).ToList();
         }
 
         public Figure GetKing(bool color)
         {
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if (ArrFigure[i, j] != null && ArrFigure[i, j].Color == color && ArrFigure[i, j] is King)
-                    {
-                        return ArrFigure[i, j];
-
-                    }
-                }
-            }
-            return null;
+            return ArrFigure.Cast<Figure>().FirstOrDefault(f => f != null && f.Color == color && f is King);
         }
 
         public void CheckGameState(bool color)
@@ -507,7 +473,7 @@ namespace kursach_wpf.framework
         public bool IsDraw()
         {
             var figures = GetAllFigures();
-            if (figures.Count <= 3) 
+            if (figures.Count <= 3)
             {
                 bool insufficientMaterial = true;
                 foreach (var figure in figures)
