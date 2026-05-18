@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -157,43 +157,28 @@ namespace kursach_wpf.framework
         {
             try
             {
-                // Cannot castle if the King is currently in check
-                if (board.IsKingInCheck(Color))
-                    return;
-
-                // Short castling (Kingside)
                 if (FirstMove && board.ArrFigure[X + 3, Y] is Rook rook && rook.FirstMove)
                 {
                     if (board.ArrFigure[X + 1, Y] == null && board.ArrFigure[X + 2, Y] == null)
                     {
-                        // The squares the King passes through and lands on cannot be under attack
-                        if (!board.IsSquareUnderAttack(X + 1, Y, Color) && !board.IsSquareUnderAttack(X + 2, Y, Color))
-                        {
-                            board.AddMarker(X + 2, Y, Color);
-                            (string, Image) a = board.ListMarcker.Find(s => s.Item1 == $"{X + 2}{Y}");
-                            Image image = a.Item2;
-                            image.MouseDown -= board.MoveFigure;
-                            image.MouseDown += Racerovka;
-                            image.MouseDown += board.MoveFigure;
-                        }
+                        board.AddMarker(X + 2, Y, Color);
+                        (string, Image) a = board.ListMarcker.Find(s => s.Item1 == $"{X + 2}{Y}");
+                        Image image = a.Item2;
+                        image.MouseDown -= board.MoveFigure;
+                        image.MouseDown += Racerovka;
+                        image.MouseDown += board.MoveFigure;
                     }
                 }
-                
-                // Long castling (Queenside)
                 if (FirstMove && board.ArrFigure[X - 4, Y] is Rook rook1 && rook1.FirstMove)
                 {
                     if (board.ArrFigure[X - 1, Y] == null && board.ArrFigure[X - 2, Y] == null && board.ArrFigure[X - 3, Y] == null)
                     {
-                        // The squares the King passes through and lands on cannot be under attack
-                        if (!board.IsSquareUnderAttack(X - 1, Y, Color) && !board.IsSquareUnderAttack(X - 2, Y, Color))
-                        {
-                            board.AddMarker(X - 2, Y, Color);
-                            (string, Image) a = board.ListMarcker.Find(s => s.Item1 == $"{X - 2}{Y}");
-                            Image image = a.Item2;
-                            image.MouseDown -= board.MoveFigure;
-                            image.MouseDown += Racerovka;
-                            image.MouseDown += board.MoveFigure;
-                        }
+                        board.AddMarker(X - 2, Y, Color);
+                        (string, Image) a = board.ListMarcker.Find(s => s.Item1 == $"{X - 2}{Y}");
+                        Image image = a.Item2;
+                        image.MouseDown -= board.MoveFigure;
+                        image.MouseDown += Racerovka;
+                        image.MouseDown += board.MoveFigure;
                     }
                 }
             }
@@ -208,8 +193,6 @@ namespace kursach_wpf.framework
             string Element = board.ListMarcker.Where(x => x.Item2 == (Image)sender).First().Item1;
             int Xr = int.Parse($"{Element[0]}");
             int Yr = int.Parse($"{Element[1]}");
-            
-            // Queenside castling rook move
             if (Xr == 6)
             {
                 board.ArrFigure[Xr + 1, Yr].X = Xr - 1;
@@ -220,7 +203,6 @@ namespace kursach_wpf.framework
                 board.ArrFigure[Xr - 1, Yr] = board.ArrFigure[Xr + 1, Yr];
                 board.ArrFigure[Xr + 1, Yr] = null;
             }
-            // Kingside castling rook move
             else if (Xr == 2)
             {
                 board.ArrFigure[Xr - 2, Yr].X = Xr + 1;
