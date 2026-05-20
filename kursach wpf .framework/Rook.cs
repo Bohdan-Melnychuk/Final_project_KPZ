@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace kursach_wpf.framework
 {
-    public class Rook : Figure
+    public class Rook : SlidingFigure
     {
         public bool FirstMove = true;
 
@@ -26,47 +26,7 @@ namespace kursach_wpf.framework
             return (targetX == X || targetY == Y) && !IsBlockedPath(X, Y, targetX, targetY);
         }
 
-        public override void MoveFigure()
-        {
-            if (!board.IsKingInCheck(Color))
-            {
-                StandardMoves();
-                return;
-            }
-            DefensiveMoves();
-        }
-
-        private void DefensiveMoves()
-        {
-            var king = board.GetKing(Color);
-            var attackers = board.GetAttackers(king.X, king.Y, Color);
-
-            if (attackers.Count > 1)
-                return;
-
-            var attacker = attackers[0];
-
-            if (CanReach(attacker.X, attacker.Y) &&
-                (board.ArrFigure[attacker.X, attacker.Y] == null ||
-                 board.ArrFigure[attacker.X, attacker.Y].Color != Color))
-            {
-                board.AddMarker(attacker.X, attacker.Y, Color);
-            }
-
-            if (attacker is Rook || attacker is Bishop || attacker is Queen)
-            {
-                var path = board.GetPathBetween(attacker.X, attacker.Y, king.X, king.Y);
-                foreach (var (x, y) in path)
-                {
-                    if (CanReach(x, y) && board.ArrFigure[x, y] == null)
-                    {
-                        board.AddMarker(x, y, Color);
-                    }
-                }
-            }
-        }
-
-        private void StandardMoves()
+        protected override void AddStandardMoves()
         {
             ScanStraight(X, Y, 1, 0, true);   // Вправо
             ScanStraight(X, Y, -1, 0, true);  // Вліво

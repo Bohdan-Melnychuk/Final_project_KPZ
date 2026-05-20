@@ -63,6 +63,7 @@
     </Compile>
     <Compile Include="Queen.cs" />
     <Compile Include="Rook.cs" />
+    <Compile Include="SlidingFigure.cs" />
     <Compile Include="start.xaml.cs">
       <DependentUpon>start.xaml</DependentUpon>
     </Compile>
@@ -82,6 +83,7 @@
     <Compile Include="Board.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="Figure.cs" />
+    <Compile Include="GameClock.cs" />
     <Compile Include="King.cs" />
     <Compile Include="Knight.cs" />
     <Compile Include="MainWindow.xaml.cs">

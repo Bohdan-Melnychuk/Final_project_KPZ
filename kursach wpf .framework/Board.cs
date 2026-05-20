@@ -7,7 +7,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Windows.Threading;
 
 namespace kursach_wpf.framework
 {
@@ -29,33 +28,24 @@ namespace kursach_wpf.framework
 
         Rectangle ramka = new Rectangle();
 
-        private DispatcherTimer whiteTimer;
-        private DispatcherTimer blackTimer;
-        private TimeSpan whiteTimeRemaining;
-        private TimeSpan blackTimeRemaining;
+        private GameClock gameClock;
         private TextBlock whiteTimerText;
         private TextBlock blackTimerText;
-        private bool isWhiteTurn = true; 
 
         public void InitializeTimers(TimeSpan initialTime)
         {
-            whiteTimeRemaining = initialTime;
-            blackTimeRemaining = initialTime;
-
             whiteTimerText = new TextBlock
             {
                 FontSize = 24,
                 Foreground = Brushes.White,
-                FontWeight = FontWeights.Bold,
-                Text = FormatTime(whiteTimeRemaining)
+                FontWeight = FontWeights.Bold
             };
 
             blackTimerText = new TextBlock
             {
                 FontSize = 24,
                 Foreground = Brushes.Black,
-                FontWeight = FontWeights.Bold,
-                Text = FormatTime(blackTimeRemaining)
+                FontWeight = FontWeights.Bold
             };
 
             Canvas.SetLeft(whiteTimerText, margin + boardSize * tileSize - 350);
@@ -70,19 +60,10 @@ namespace kursach_wpf.framework
             Panel.SetZIndex(whiteTimerText, 999);
             Panel.SetZIndex(blackTimerText, 999);
 
-            whiteTimer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromSeconds(1)
-            };
-            whiteTimer.Tick += WhiteTimer_Tick;
-
-            blackTimer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromSeconds(1)
-            };
-            blackTimer.Tick += BlackTimer_Tick;
-
-            whiteTimer.Start();
+            gameClock = new GameClock();
+            gameClock.TimeUpdated += OnTimeUpdated;
+            gameClock.TimeExpired += OnTimeExpired;
+            gameClock.Start(initialTime);
         }
 
         private string FormatTime(TimeSpan time)
@@ -90,55 +71,19 @@ namespace kursach_wpf.framework
             return $"{time.Minutes:D2}:{time.Seconds:D2}";
         }
 
-        private void WhiteTimer_Tick(object sender, EventArgs e)
+        private void OnTimeUpdated(TimeSpan whiteTime, TimeSpan blackTime, bool isWhiteTurn)
         {
-            if (whiteTimeRemaining.TotalSeconds > 0)
-            {
-                whiteTimeRemaining = whiteTimeRemaining.Subtract(TimeSpan.FromSeconds(1));
-                whiteTimerText.Text = FormatTime(whiteTimeRemaining);
-            }
-            else
-            {
-                whiteTimer.Stop();
-                var page = new Page1('t');
-                Application.Current.MainWindow.Content = page;
-                window.Close();
-            }
+            whiteTimerText.Text = FormatTime(whiteTime);
+            blackTimerText.Text = FormatTime(blackTime);
+            whiteTimerText.Foreground = isWhiteTurn ? Brushes.White : Brushes.Gray;
+            blackTimerText.Foreground = isWhiteTurn ? Brushes.Gray : Brushes.Black;
         }
 
-        private void BlackTimer_Tick(object sender, EventArgs e)
+        private void OnTimeExpired(bool whiteTimerExpired)
         {
-            if (blackTimeRemaining.TotalSeconds > 0)
-            {
-                blackTimeRemaining = blackTimeRemaining.Subtract(TimeSpan.FromSeconds(1));
-                blackTimerText.Text = FormatTime(blackTimeRemaining);
-            }
-            else
-            {
-                blackTimer.Stop();
-                var page = new Page1('r');
-                Application.Current.MainWindow.Content = page;
-                window.Close();
-            }
-        }
-
-        private void SwitchTurns()
-        {
-            if (isWhiteTurn)
-            {
-                whiteTimer.Stop();
-                blackTimer.Start();
-                whiteTimerText.Foreground = Brushes.Gray;
-                blackTimerText.Foreground = Brushes.Black;
-            }
-            else
-            {
-                blackTimer.Stop();
-                whiteTimer.Start();
-                blackTimerText.Foreground = Brushes.Gray;
-                whiteTimerText.Foreground = Brushes.White;
-            }
-            isWhiteTurn = !isWhiteTurn;
+            var page = new Page1(whiteTimerExpired ? 't' : 'r');
+            Application.Current.MainWindow.Content = page;
+            window.Close();
         }
 
         public void StartPositionFigure()
@@ -225,7 +170,7 @@ namespace kursach_wpf.framework
 
             figure.ImageFigure.MouseDown += (sender, e) =>
             {
-                if (figure.Color != isWhiteTurn)
+                if (gameClock != null && figure.Color != gameClock.IsWhiteTurn)
                 {
                     return;
                 }
@@ -354,7 +299,7 @@ namespace kursach_wpf.framework
 
             CheckGameState(!ActiveFigure.Color);
 
-            SwitchTurns();
+            gameClock?.SwitchTurns();
 
             ActiveFigure = null;
         }
