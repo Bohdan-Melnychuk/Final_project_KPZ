@@ -83,6 +83,7 @@
     <Compile Include="Board.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="Figure.cs" />
+    <Compile Include="GameClock.cs" />
     <Compile Include="King.cs" />
     <Compile Include="Knight.cs" />
     <Compile Include="MainWindow.xaml.cs">
