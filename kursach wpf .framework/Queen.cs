@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace kursach_wpf.framework
 {
-    public class Queen : Figure
+    public class Queen : SlidingFigure
     {
         public Queen(bool color) : base(color, $"pack://application:,,,/Image/Queen {(color ? "White" : "Black")} Outline 288px.png")
         {
@@ -25,47 +25,7 @@ namespace kursach_wpf.framework
                     !IsBlockedPath(X, Y, targetX, targetY);
         }
 
-        public override void MoveFigure()
-        {
-            if (!board.IsKingInCheck(Color))
-            {
-                StandardMoves();
-                return;
-            }
-            DefensiveMoves();
-        }
-
-        private void DefensiveMoves()
-        {
-            var king = board.GetKing(Color);
-            var attackers = board.GetAttackers(king.X, king.Y, Color);
-
-            if (attackers.Count > 1)
-                return;
-
-            var attacker = attackers[0];
-
-            if (CanReach(attacker.X, attacker.Y) &&
-                (board.ArrFigure[attacker.X, attacker.Y] == null ||
-                 board.ArrFigure[attacker.X, attacker.Y].Color != Color))
-            {
-                board.AddMarker(attacker.X, attacker.Y, Color);
-            }
-
-            if (attacker is Rook || attacker is Bishop || attacker is Queen)
-            {
-                var path = board.GetPathBetween(attacker.X, attacker.Y, king.X, king.Y);
-                foreach (var (x, y) in path)
-                {
-                    if (CanReach(x, y) && board.ArrFigure[x, y] == null)
-                    {
-                        board.AddMarker(x, y, Color);
-                    }
-                }
-            }
-        }
-
-        private void StandardMoves()
+        protected override void AddStandardMoves()
         {
             ScanDiagonal(X, Y, 1, -1, true);  // Вправо-вверх
             ScanDiagonal(X, Y, -1, 1, true);  // Вліво-вниз

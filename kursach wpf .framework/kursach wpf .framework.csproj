@@ -63,6 +63,7 @@
     </Compile>
     <Compile Include="Queen.cs" />
     <Compile Include="Rook.cs" />
+    <Compile Include="SlidingFigure.cs" />
     <Compile Include="start.xaml.cs">
       <DependentUpon>start.xaml</DependentUpon>
     </Compile>
